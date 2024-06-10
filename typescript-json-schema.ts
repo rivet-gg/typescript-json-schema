@@ -1680,7 +1680,11 @@ export function buildGenerator(
     }
 
     if (args.tsNodeRegister) {
-        require("ts-node/register");
+        try {
+            require("ts-node/register");
+        } catch (_err) {
+            throw new Error("ts-node required for tsNodeRegister. Install with: npm install ts-node");
+        }
     }
 
     let diagnostics: ReadonlyArray<ts.Diagnostic> = [];
